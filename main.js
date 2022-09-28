@@ -1,7 +1,4 @@
-
 // My Contacts Basic
-// localStorage.setItem("contacts", "[]")
-
 
 // HTML Elements
 let goBtnEl = document.getElementById('go-btn');
@@ -48,28 +45,34 @@ function addContact() {
   let email = prompt("Please enter an email");
   let country = prompt("Please enter your country");
   let description = {'name': name, 'phone': phone, 'email': email, 'country':country}
+ 
   contacts.push(newContacts(description));
+ 
   for (let i = 0; i < contacts.length; i++){
-  outputEl.innerHTML = `New Contact Added: ${i} ${name}`
-  saveContacts();
+    outputEl.innerHTML = `New Contact Added: ${i} ${name}`
+    saveContacts();
   }
 }
 
 // Remove contact by index
 function removeContact() {
   let index = +prompt("Enter the # of contact you want to remove:");
+ 
   if (index >= 0 && index < contacts.length) {
     contacts.splice(index, 1);
     saveContacts();
     displayContacts();
+  
   } else {
     alert("Number is not valid");
   }
 }
 
+// takes the array of objects and filters through them by name
 function displayByName() {
   outputEl.innerHTML = "";
   let searchByName = prompt("Please search info by name");
+  
   for (let i = 0; i < contacts.length; i++){
     if (contacts[i].description.name.includes(searchByName)) {
       outputEl.innerHTML += getContactHTMLStr(contacts[i], i);
@@ -78,9 +81,11 @@ function displayByName() {
 
 }
 
+// takes the array of objects and filters through them by country name
 function displayByCountry() {
   outputEl.innerHTML = "";
   let countrySearch = prompt("Please search a country");
+  
   for (let i = 0; i < contacts.length; i++) {
   if (countrySearch === contacts[i].description.country) {
     outputEl.innerHTML += getContactHTMLStr(contacts[i], i);
